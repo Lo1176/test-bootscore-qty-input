@@ -54,7 +54,7 @@ jQuery(function ($) {
 jQuery(function ($) {
   // Smooth Scroll. Will be removed when Safari supports scroll-behaviour: smooth (Bootstrap 5).
   $(function () {
-    $('a[href*="#"]:not([href="#"]):not(a.comment-reply-link):not([href="#tab-reviews"]):not([href="#tab-additional_information"]):not([href="#tab-description"]):not([href="#reviews"]):not([href="#carouselExampleIndicators"]):not([data-smoothscroll="false"])').click(function () {
+    $('a[href*="#"]:not([href="#"]):not(a.comment-reply-link):not([href="#tab-reviews"]):not([href="#tab-additional_information"]):not([href="#tab-description"]):not([href="#reviews"]):not([href="#carouselExampleIndicators"]):not(.wc-tabs .nav-link):not([data-smoothscroll="false"])').click(function () {
       if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
         var target = $(this.hash);
         target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
@@ -100,56 +100,5 @@ jQuery(function ($) {
   $('.height-75').css('height', 0.75 * $(window).height());
   $('.height-85').css('height', 0.85 * $(window).height());
   $('.height-100').css('height', 1.0 * $(window).height());
-
-  // Forms
-  $('select').addClass('form-select').removeClass('form-control'); // form-control is added to select by WooCommerce form filter
-
-  // Alert links
-  $('.alert a').addClass('alert-link');
-
-  // WC Quantity Input
-  if (!String.prototype.getDecimals) {
-    String.prototype.getDecimals = function () {
-      var num = this,
-        match = ('' + num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
-      if (!match) {
-        return 0;
-      }
-      return Math.max(0, (match[1] ? match[1].length : 0) - (match[2] ? +match[2] : 0));
-    }
-  }
-  // Quantity "plus" and "minus" buttons
-  $(document.body).on('click', '.plus, .minus', function () {
-    var $qty = $(this).closest('.quantity').find('.qty'),
-      currentVal = parseFloat($qty.val()),
-      max = parseFloat($qty.attr('max')),
-      min = parseFloat($qty.attr('min')),
-      step = $qty.attr('step');
-
-    // Format values
-    if (!currentVal || currentVal === '' || currentVal === 'NaN') currentVal = 0;
-    if (max === '' || max === 'NaN') max = '';
-    if (min === '' || min === 'NaN') min = 0;
-    if (step === 'any' || step === '' || step === undefined || parseFloat(step) === 'NaN') step = 1;
-
-    // Change the value
-    if ($(this).is('.plus')) {
-      if (max && (currentVal >= max)) {
-        $qty.val(max);
-      } else {
-        $qty.val((currentVal + parseFloat(step)).toFixed(step.getDecimals()));
-      }
-    } else {
-      if (min && (currentVal <= min)) {
-        $qty.val(min);
-      } else if (currentVal > 0) {
-        $qty.val((currentVal - parseFloat(step)).toFixed(step.getDecimals()));
-      }
-    }
-
-    // Trigger change event
-    $qty.trigger('change');
-  });
-  // WC Quantity Input End
 
 }); // jQuery End
