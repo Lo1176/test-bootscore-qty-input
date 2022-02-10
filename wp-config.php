@@ -94,3 +94,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
+
+/** scssphp compiles on every pageload */ 
+define('WP_ENVIRONMENT_TYPE', 'development');
