@@ -45,6 +45,7 @@
 
 // woocommerce breakpoint is at 992px
 @media (max-width: 991px) {
+  // put qty-btn and add to cart on two lines
   .woocommerce div.product form.cart {
     flex-wrap: wrap;
     div.quantity {
@@ -59,5 +60,12 @@
 @media (max-width: 768px) {
   .woocommerce-cart-form .product-quantity .quantity {
     margin-left: auto;
+  }
+  .woocommerce div.product form.cart {
+    div.quantity {
+      margin-right: 1rem;
+      width: 40%;
+      margin-bottom: 0;
+    }
   }
 }
